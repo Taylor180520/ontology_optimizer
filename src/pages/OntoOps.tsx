@@ -285,12 +285,12 @@ export default function OntoOps() {
   const renderFollowUps = (panel: string) => {
     const followUps = getFollowUps(panel);
     return (
-      <div className="mt-3 flex flex-wrap gap-3">
+      <div className="mt-4 flex flex-wrap gap-3">
         {followUps.map((fu) => (
           <button
             key={fu.label}
             onClick={() => handleFollowUp(fu.action)}
-            className="px-6 py-3 rounded-full border border-white/20 text-sm text-gray-300 hover:text-white hover:border-white/40 transition-all"
+            className="px-6 py-3 rounded-full border border-white/20 text-base text-gray-300 hover:text-white hover:border-white/40 transition-all"
           >
             {fu.label}
           </button>
@@ -303,16 +303,16 @@ export default function OntoOps() {
     if (message.content === 'WELCOME') {
       return (
         <div className="w-full">
-          <div className="text-sm leading-relaxed text-gray-300 space-y-2">
-            <p>Hi, I'm OntoOps — your ontology operations assistant. Here's what I can help you with:</p>
-            <ul className="list-disc list-inside space-y-1 text-gray-400 text-sm pl-1">
+          <div className="text-base leading-[1.7] text-gray-200 space-y-3 font-normal">
+            <p>Hi, I'm your ontology operations assistant. Here's what I can help you with:</p>
+            <ul className="list-disc list-inside space-y-2 text-gray-300 text-base pl-1">
               <li>Monitor ontology health across all business domains</li>
               <li>Search and browse question tasks with multi-dimensional filters</li>
               <li>Manage the expert pool and workload</li>
               <li>Import experts via manual input, CSV upload, or internal API</li>
               <li>View your personal task list with today's to-do and history</li>
             </ul>
-            <p className="text-gray-500">Pick an action below or just tell me what you need.</p>
+            <p className="text-gray-400">Pick an action below or just tell me what you need.</p>
           </div>
           <div className="mt-4 flex flex-wrap gap-3">
             {[
@@ -325,7 +325,7 @@ export default function OntoOps() {
               <button
                 key={btn.key}
                 onClick={() => handleQuickAction(btn.key)}
-                className="px-6 py-3 rounded-full border border-white/20 text-sm text-gray-300 hover:text-white hover:border-white/40 transition-all"
+                className="px-6 py-3 rounded-full border border-white/20 text-base text-gray-300 hover:text-white hover:border-white/40 transition-all"
               >
                 {btn.label}
               </button>
@@ -339,20 +339,20 @@ export default function OntoOps() {
     if (message.content === 'IMPORT_PROMPT') {
       return (
         <div className="w-full">
-          <div className="text-sm leading-relaxed text-gray-300 space-y-2">
+          <div className="text-base leading-[1.7] text-gray-200 space-y-3 font-normal">
             <p>Sure, I can help you import experts. Here are your options:</p>
-            <div className="space-y-3 mt-3">
-              <div className="p-3 rounded-xl bg-white/5 border border-white/10">
-                <p className="text-sm text-white font-medium mb-1">1. Tell me directly</p>
-                <p className="text-xs text-gray-400">Just type the expert details (name, email, department, domains) and I'll add them.</p>
+            <div className="space-y-3 mt-4">
+              <div className="p-4 rounded-xl bg-white/5 border border-white/10">
+                <p className="text-base text-white font-medium mb-1.5">1. Tell me directly</p>
+                <p className="text-sm text-gray-300 leading-relaxed">Just type the expert details (name, email, department, domains) and I'll add them.</p>
               </div>
-              <div className="p-3 rounded-xl bg-white/5 border border-white/10">
-                <p className="text-sm text-white font-medium mb-1">2. Upload CSV / Excel</p>
-                <p className="text-xs text-gray-400">Drag and drop or attach a spreadsheet file with expert data.</p>
+              <div className="p-4 rounded-xl bg-white/5 border border-white/10">
+                <p className="text-base text-white font-medium mb-1.5">2. Upload CSV / Excel</p>
+                <p className="text-sm text-gray-300 leading-relaxed">Drag and drop or attach a spreadsheet file with expert data.</p>
               </div>
-              <div className="p-3 rounded-xl bg-white/5 border border-white/10">
-                <p className="text-sm text-white font-medium mb-1">3. Connect to internal API</p>
-                <p className="text-xs text-gray-400">Paste your API endpoint config as JSON and I'll fetch the data. Example:</p>
+              <div className="p-4 rounded-xl bg-white/5 border border-white/10">
+                <p className="text-base text-white font-medium mb-1.5">3. Connect to internal API</p>
+                <p className="text-sm text-gray-300 leading-relaxed">Paste your API endpoint config as JSON and I'll fetch the data. Example:</p>
                 <pre className="mt-2 p-2 rounded-lg bg-black/60 text-[11px] text-indigo-300 overflow-x-auto">{`{"request": {
   "method": "GET",
   "url": "/api/hrm/employees",
@@ -365,7 +365,7 @@ export default function OntoOps() {
             </div>
           </div>
           {renderFollowUps('import_prompt')}
-          <p className="text-xs text-gray-500 mt-3">{message.timestamp}</p>
+          <p className="text-xs text-gray-500 mt-4">{message.timestamp}</p>
         </div>
       );
     }
@@ -405,7 +405,7 @@ export default function OntoOps() {
       };
       return (
         <div className="w-full">
-          <p className="text-sm text-gray-300">{panelTexts[panel] || 'Panel switched.'}</p>
+          <p className="text-base leading-[1.7] text-gray-200 font-normal">{panelTexts[panel] || 'Panel switched.'}</p>
           {renderFollowUps(panel)}
           <p className="text-xs text-gray-500 mt-2">{message.timestamp}</p>
         </div>
@@ -413,8 +413,8 @@ export default function OntoOps() {
     }
 
     return (
-      <div className={message.role === 'user' ? 'text-white text-sm' : ''}>
-        <p className={`text-sm whitespace-pre-wrap leading-relaxed ${message.role === 'user' ? 'text-white' : 'text-gray-300'}`}>
+      <div className={message.role === 'user' ? 'text-white text-base' : ''}>
+        <p className={`text-base whitespace-pre-wrap leading-[1.7] font-normal ${message.role === 'user' ? 'text-white' : 'text-gray-200'}`}>
           {message.content}
         </p>
         {message.role === 'steward' && (
@@ -422,7 +422,7 @@ export default function OntoOps() {
             ? renderFollowUps('import_confirmed')
             : renderFollowUps('fallback')
         )}
-        <p className={`text-xs mt-2 ${message.role === 'user' ? 'text-gray-500' : 'text-gray-600'}`}>{message.timestamp}</p>
+        <p className={`text-xs mt-3 ${message.role === 'user' ? 'text-gray-500' : 'text-gray-600'}`}>{message.timestamp}</p>
       </div>
     );
   };
@@ -449,7 +449,7 @@ export default function OntoOps() {
   return (
     <div className="min-h-screen flex flex-col bg-black">
       <header className="h-16 flex items-center justify-between px-6 border-b border-white/5">
-        <h1 className="text-xl font-semibold text-white">OntoOps</h1>
+        <h1 className="text-xl font-semibold text-white">Ontology Optimizer</h1>
       </header>
 
       <div className="flex-1 flex">
