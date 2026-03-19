@@ -15,6 +15,8 @@ export interface OntologyQuestion {
   runtimeTrace?: { agentId: string; date: string; snippet: string[] };
   answers: ExpertAnswer[];
   dispatchStages: DispatchStage[];
+  options?: string[];
+  correctAnswer?: string;
 }
 
 export interface ExpertAnswer {
@@ -113,6 +115,12 @@ export const questions: OntologyQuestion[] = [
     consensusAnswered: 3,
     consensusConsistency: 67,
     consensusThreshold: 80,
+    options: [
+      'The current definition is correct',
+      'Should support both tier-based and volume-based discount models',
+      'Need to clarify the calculation logic in the definition',
+      'Uncertain, requires more context'
+    ],
     runtimeTrace: {
       agentId: 'Agent #12',
       date: '2026-03-15',
@@ -146,6 +154,12 @@ export const questions: OntologyQuestion[] = [
     consensusAnswered: 0,
     consensusConsistency: 0,
     consensusThreshold: 80,
+    options: [
+      'The current definition is correct',
+      'Add cold-chain logistics timeline (24-48 hours)',
+      'Add temperature-controlled shipping requirements',
+      'Uncertain, need more information'
+    ],
     answers: [],
     dispatchStages: [
       { stage: 1, label: 'Initial dispatch (2 junior experts)', status: 'pending', experts: [] },
@@ -165,6 +179,12 @@ export const questions: OntologyQuestion[] = [
     consensusAnswered: 2,
     consensusConsistency: 100,
     consensusThreshold: 80,
+    options: [
+      'The current definitions are correct',
+      'Merge the two concepts into a unified Safety Stock definition',
+      'Keep separate but clarify the relationship',
+      'Uncertain, need domain expert input'
+    ],
     answers: [
       { expertId: 'e5', expertName: 'Eva Sun', domain: 'Warehouse Mgmt', conclusion: 'incorrect', note: 'The two concepts should be merged into a unified Safety Stock definition', time: '2026-03-16 14:00' },
       { expertId: 'e1', expertName: 'Alex Chen', domain: 'Warehouse Mgmt', conclusion: 'incorrect', note: 'Agree on merging; alert threshold should be a trigger condition of safety stock', time: '2026-03-16 14:30' },
@@ -187,6 +207,13 @@ export const questions: OntologyQuestion[] = [
     consensusAnswered: 5,
     consensusConsistency: 100,
     consensusThreshold: 80,
+    correctAnswer: 'The current ontology definition is correct and should be maintained.',
+    options: [
+      'The current definition is correct',
+      'Clarify "receiving the goods" as delivery confirmation date',
+      'Change to 7 days from order date',
+      'Uncertain, need legal review'
+    ],
     answers: [
       { expertId: 'e6', expertName: 'Frank Zhou', domain: 'Support Process', conclusion: 'correct', time: '2026-03-15 09:00' },
       { expertId: 'e3', expertName: 'Carol Wang', domain: 'Sales Strategy', conclusion: 'correct', time: '2026-03-15 09:30' },
@@ -212,6 +239,12 @@ export const questions: OntologyQuestion[] = [
     consensusAnswered: 0,
     consensusConsistency: 0,
     consensusThreshold: 80,
+    options: [
+      'The current definition is correct',
+      'Add on-time delivery as a third dimension (33% weight)',
+      'Rebalance to price 30%, quality 40%, delivery 30%',
+      'Uncertain, need supply chain expert input'
+    ],
     answers: [],
     dispatchStages: [
       { stage: 1, label: 'Initial dispatch (2 junior experts)', status: 'pending', experts: [] },
@@ -231,6 +264,12 @@ export const questions: OntologyQuestion[] = [
     consensusAnswered: 1,
     consensusConsistency: 0,
     consensusThreshold: 80,
+    options: [
+      'The current definition is correct',
+      'Clarify that Order Priority is for logistics only',
+      'Create a separate Financial Priority field',
+      'Uncertain, need cross-department review'
+    ],
     runtimeTrace: {
       agentId: 'Agent #7',
       date: '2026-03-14',
@@ -261,6 +300,12 @@ export const questions: OntologyQuestion[] = [
     consensusAnswered: 1,
     consensusConsistency: 100,
     consensusThreshold: 80,
+    options: [
+      'The current SOP is correct',
+      'Add cross-dock flow as a parallel branch',
+      'Add cross-dock as a conditional step in the main flow',
+      'Uncertain, need warehouse operations review'
+    ],
     answers: [
       { expertId: 'e5', expertName: 'Eva Sun', domain: 'Warehouse Mgmt', conclusion: 'incorrect', note: 'Cross-dock flow must be added as a parallel branch in the SOP', time: '2026-03-17 09:00' },
     ],
@@ -282,6 +327,12 @@ export const questions: OntologyQuestion[] = [
     consensusAnswered: 0,
     consensusConsistency: 0,
     consensusThreshold: 80,
+    options: [
+      'The current SOP is correct',
+      'Allow trusted suppliers to skip quality check',
+      'Add sampling inspection for trusted suppliers',
+      'Uncertain, need quality control review'
+    ],
     runtimeTrace: {
       agentId: 'Agent #19',
       date: '2026-03-16',
@@ -310,6 +361,13 @@ export const questions: OntologyQuestion[] = [
     consensusAnswered: 5,
     consensusConsistency: 80,
     consensusThreshold: 80,
+    correctAnswer: 'Put-away should consider FIFO compliance, not just proximity. FIFO must take priority over travel time optimization.',
+    options: [
+      'The current rule is correct',
+      'Put-away should consider FIFO, not just proximity',
+      'Add FIFO as a secondary consideration',
+      'Uncertain, need warehouse operations review'
+    ],
     answers: [
       { expertId: 'e5', expertName: 'Eva Sun', domain: 'Warehouse Mgmt', conclusion: 'incorrect', note: 'Put-away should consider FIFO, not just proximity', time: '2026-03-14 10:00' },
       { expertId: 'e1', expertName: 'Alex Chen', domain: 'Warehouse Mgmt', conclusion: 'incorrect', note: 'Agree — FIFO compliance must take priority', time: '2026-03-14 11:00' },
@@ -335,6 +393,12 @@ export const questions: OntologyQuestion[] = [
     consensusAnswered: 2,
     consensusConsistency: 100,
     consensusThreshold: 80,
+    options: [
+      'The current strategy is correct',
+      'Add batch picking for SKUs with >50 daily orders',
+      'Add wave picking for peak hours',
+      'Uncertain, need warehouse operations input'
+    ],
     answers: [
       { expertId: 'e5', expertName: 'Eva Sun', domain: 'Warehouse Mgmt', conclusion: 'incorrect', note: 'Batch picking should be the default for SKUs with >50 daily orders', time: '2026-03-17 08:00' },
       { expertId: 'e1', expertName: 'Alex Chen', domain: 'Warehouse Mgmt', conclusion: 'incorrect', note: 'Wave picking should also be considered for peak hours', time: '2026-03-17 09:30' },
@@ -357,6 +421,12 @@ export const questions: OntologyQuestion[] = [
     consensusAnswered: 1,
     consensusConsistency: 100,
     consensusThreshold: 80,
+    options: [
+      'The current calculation is correct',
+      'Integrate regional holiday API for accurate calculation',
+      'Add manual holiday calendar configuration',
+      'Uncertain, need logistics operations input'
+    ],
     answers: [
       { expertId: 'e2', expertName: 'Brian Li', domain: 'Logistics Pricing', conclusion: 'incorrect', note: 'Must integrate regional holiday API for accurate calculation', time: '2026-03-17 10:00' },
     ],

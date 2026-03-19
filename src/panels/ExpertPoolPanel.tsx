@@ -93,7 +93,7 @@ export default function ExpertPoolPanel({ searchQuery }: Props) {
 
       {/* Summary stats */}
       {!searchQuery && (
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-2 gap-4">
         <div className="bg-dark-50 rounded-2xl p-5 border border-white/5 text-center">
           <div className="text-3xl font-bold text-white">{topExperts.length}</div>
           <p className="text-xs text-gray-400 mt-1">Total Experts</p>
@@ -101,12 +101,6 @@ export default function ExpertPoolPanel({ searchQuery }: Props) {
         <div className="bg-dark-50 rounded-2xl p-5 border border-white/5 text-center">
           <div className="text-3xl font-bold text-emerald-400">{topExperts.filter((e) => e.online).length}</div>
           <p className="text-xs text-gray-400 mt-1">Online Now</p>
-        </div>
-        <div className="bg-dark-50 rounded-2xl p-5 border border-white/5 text-center">
-          <div className="text-3xl font-bold text-cyan-400">
-            {Math.round(topExperts.reduce((s, e) => s + e.dailyCompleted / e.dailyLimit, 0) / topExperts.length * 100)}%
-          </div>
-          <p className="text-xs text-gray-400 mt-1">Avg Utilization</p>
         </div>
       </div>
       )}

@@ -39,20 +39,11 @@ export default function ImportPreviewPanel({ experts: initialExperts, onConfirm 
         <div>
           <h2 className="text-2xl font-bold text-white mb-1">Import Preview</h2>
           <p className="text-sm text-gray-500">
-            {experts.length} experts fetched from HRM API
+            {experts.length} experts
             {removedCount > 0 && <span className="text-amber-400"> · {removedCount} removed</span>}
           </p>
         </div>
         <UserPlus className="w-8 h-8 text-indigo-400" />
-      </div>
-
-      {/* API source badge */}
-      <div className="bg-dark-50 rounded-2xl border border-indigo/20 p-4">
-        <div className="flex items-center gap-2 mb-2">
-          <div className="w-2 h-2 rounded-full bg-emerald-400" />
-          <span className="text-xs text-emerald-400 font-medium uppercase tracking-wide">API Connected</span>
-        </div>
-        <p className="text-xs text-gray-400 font-mono">GET /api/hrm/employees?department=Logistics&role=Specialist</p>
       </div>
 
       {/* Expert cards */}

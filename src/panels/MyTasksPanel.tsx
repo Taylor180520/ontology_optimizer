@@ -28,9 +28,7 @@ export default function MyTasksPanel() {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold text-white mb-1">My Tasks</h2>
-          <p className="text-sm text-gray-500">
-            {currentUser.name} · {todoTasks.length} pending, {repliedTasks.length} replied
-          </p>
+
         </div>
         <ClipboardList className="w-8 h-8 text-indigo-400" />
       </div>
@@ -82,7 +80,6 @@ export default function MyTasksPanel() {
             <div className="flex items-center gap-3 mb-2">
               <span className="text-xs text-gray-500 font-mono flex-shrink-0">{task.questionId}</span>
               <span className="px-1.5 py-0.5 rounded text-[10px] bg-white/5 text-gray-400">{task.domain}</span>
-              <div className={`w-2.5 h-2.5 rounded-full flex-shrink-0 ml-auto ${priorityDots[task.priority]}`} />
             </div>
             <p className="text-sm text-gray-300 mb-2">{task.summary}</p>
             <div className="flex items-center gap-4 text-xs text-gray-500">
@@ -90,7 +87,7 @@ export default function MyTasksPanel() {
               {task.status === 'replied' && task.repliedDate && (
                 <span>Replied {task.repliedDate}</span>
               )}
-              {task.conclusion && (
+              {task.conclusion && task.conclusion !== 'incorrect' && (
                 <span className={conclusionLabels[task.conclusion].color}>
                   {conclusionLabels[task.conclusion].label}
                 </span>

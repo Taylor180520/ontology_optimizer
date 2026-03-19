@@ -5,11 +5,7 @@ import type { OntologyQuestion } from '../data/mockData';
 
 const statusFilters = [
   { key: 'all', label: 'All' },
-  { key: 'pending_dispatch', label: 'Pending Dispatch' },
-  { key: 'pending_answer', label: 'Pending Answer' },
   { key: 'concluded', label: 'Concluded' },
-  { key: 'timeout', label: 'Timed Out' },
-  { key: 'closed', label: 'Closed' },
 ];
 
 const sourceFilters = [
@@ -127,11 +123,11 @@ export default function QuestionTasksPanel({ onSelectQuestion, searchQuery }: Pr
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold text-white mb-1">Question Tasks</h2>
-          <p className="text-sm text-gray-500">
-            {searchQuery
-              ? `Top matches for "${searchQuery}" · ${filtered.length} result${filtered.length !== 1 ? 's' : ''}`
-              : `${filtered.length} task${filtered.length !== 1 ? 's' : ''} in the question bank`}
-          </p>
+          {searchQuery && (
+            <p className="text-sm text-gray-500">
+              Top matches for "{searchQuery}" · {filtered.length} result{filtered.length !== 1 ? 's' : ''}
+            </p>
+          )}
         </div>
         <button
           onClick={handleExport}
@@ -174,27 +170,6 @@ export default function QuestionTasksPanel({ onSelectQuestion, searchQuery }: Pr
               </button>
             ))}
           </div>
-          {/* Source + Response */}
-          <div className="flex gap-2">
-            <select
-              value={activeSource}
-              onChange={(e) => setActiveSource(e.target.value)}
-              className="bg-dark-50 border border-white/10 rounded-lg px-3 py-1.5 text-xs text-gray-400 focus:outline-none"
-            >
-              {sourceFilters.map((s) => (
-                <option key={s.key} value={s.key}>{s.label}</option>
-              ))}
-            </select>
-            <select
-              value={activeResponse}
-              onChange={(e) => setActiveResponse(e.target.value)}
-              className="bg-dark-50 border border-white/10 rounded-lg px-3 py-1.5 text-xs text-gray-400 focus:outline-none"
-            >
-              {responseFilters.map((r) => (
-                <option key={r.key} value={r.key}>{r.label}</option>
-              ))}
-            </select>
-          </div>
         </div>
       )}
 
@@ -211,35 +186,16 @@ export default function QuestionTasksPanel({ onSelectQuestion, searchQuery }: Pr
           >
             <div className="flex items-center gap-3 mb-2">
               <span className="text-xs text-gray-500 font-mono flex-shrink-0">{q.id}</span>
-              <span className={`px-2 py-0.5 rounded text-[10px] font-semibold flex-shrink-0 ${sourceColors[q.source]}`}>
-                {q.source === 'structural' ? 'Structural' : q.source === 'inference' ? 'Inference' : 'Runtime'}
-              </span>
               <span className="px-1.5 py-0.5 rounded text-[10px] bg-white/5 text-gray-400 flex-shrink-0">{q.domain}</span>
-              <span className={`px-2 py-0.5 rounded text-[10px] font-semibold flex-shrink-0 ${statusColors[q.status]}`}>
-                {statusLabels[q.status]}
-              </span>
-              <div className={`w-2.5 h-2.5 rounded-full flex-shrink-0 ml-auto ${priorityDots[q.priority]}`} />
+              {q.status === 'concluded' && (
+                <span className={`px-2 py-0.5 rounded text-[10px] font-semibold flex-shrink-0 ${statusColors[q.status]}`}>
+                  {statusLabels[q.status]}
+                </span>
+              )}
             </div>
             <p className="text-sm text-gray-300 mb-2">{q.summary}</p>
             <div className="flex items-center gap-4 text-xs text-gray-500">
               <span>Experts: {q.consensusAnswered}/{q.consensusTotal}</span>
-              {q.consensusAnswered > 0 && (
-                <div className="flex items-center gap-1.5">
-                  <div className="w-20 h-1.5 bg-white/5 rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-indigo-400 rounded-full"
-                      style={{ width: `${(q.consensusAnswered / q.consensusTotal) * 100}%` }}
-                    />
-                  </div>
-                  <span>{q.consensusConsistency}% consensus</span>
-                </div>
-              )}
-              {q.dispatchStages.some((s) => s.status === 'in_progress') && (
-                <span className="text-indigo-400">Dispatched</span>
-              )}
-              {q.dispatchStages.every((s) => s.status === 'pending') && (
-                <span className="text-gray-600">Not dispatched</span>
-              )}
             </div>
           </div>
         ))}
